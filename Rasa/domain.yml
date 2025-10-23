@@ -1,0 +1,252 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - working_hours
+  - location
+  - contact_info
+  - services 
+  - working_days
+  - ask_opening_hours
+  - book_appointment
+  - provide_full_name
+  - provide_date
+  - view_appointment
+  - cancel_appointment
+  - upload_audio
+  - send_audio
+  - book_appointment_with_details
+  - ask_list_doctors
+  - ask_doctor_availability
+entities:
+  - date
+  - time
+  - doctor_name
+
+actions:
+  - action_check_open_day
+  - validate_appointment_form
+  - validate_getappointment_form
+  - action_save_appointment
+  - action_get_appointment
+  - action_reset_appointment_slots
+  - action_cancel_appointment
+  - action_predict_parkinson
+  - action_get_doctor_list
+  - action_get_doctor_availability
+  - action_confirm_suggested_appointment
+slots:
+  full_name:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: appointment_form
+            requested_slot: full_name
+          - active_loop: getappointment_form
+            requested_slot: full_name
+  
+  date_of_birth:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: appointment_form
+            requested_slot: date_of_birth
+          - active_loop: getappointment_form
+            requested_slot: date_of_birth
+
+  appointment_date:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: date
+        intent: book_appointment_with_details
+        conditions:
+          - active_loop: null 
+      - type: from_text
+        conditions:
+          - active_loop: appointment_form
+            requested_slot: appointment_date
+          
+
+  appointment_time:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: time
+        intent: book_appointment_with_details
+        conditions:
+          - active_loop: null
+      - type: from_text
+        conditions:
+          - active_loop: appointment_form
+            requested_slot: appointment_time
+
+  specific_doctor:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: doctor_name
+        intent: book_appointment_with_details
+         
+        conditions:
+          - active_loop: null
+      - type: from_text
+        conditions:
+          - active_loop: appointment_form
+            requested_slot: specific_doctor
+          
+  selected_doctor:
+    type: text
+    mappings:
+      - type: custom
+  
+  availability_doctor:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: doctor_name
+        intent: ask_doctor_availability
+      - type: from_text
+        conditions:
+          - active_loop: doctoravailability_form
+            requested_slot: availability_doctor
+
+  availability_date:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: date
+        intent: ask_doctor_availability
+      - type: from_text
+        conditions:
+          - active_loop: doctoravailability_form
+            requested_slot: availability_date
+
+  user_id:
+    type: float
+    mappings:
+      - type: custom
+  
+  suggested_time:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+  suggested_date:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+  suggested_doctor:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+  
+  
+
+
+forms:
+  appointment_form:
+    required_slots:
+      - full_name
+      - date_of_birth
+      - appointment_date
+      - specific_doctor
+      - appointment_time
+
+  getappointment_form:   
+    required_slots:
+      - full_name
+      - date_of_birth
+
+  doctoravailability_form:
+    required_slots:
+      - availability_doctor
+      - availability_date
+
+responses:
+  utter_greet:
+    - text: "Hey! How are you?"
+
+  utter_cheer_up:
+    - text: "Here is something to cheer you up:"
+      image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+    - text: "Did that help you?"
+
+  utter_happy:
+    - text: "Great, carry on!"
+
+  utter_goodbye:
+    - text: "Bye"
+
+  utter_iamabot:
+    - text: "I am a bot, powered by Rasa."
+
+  utter_working_hours:
+    - text: "Our clinic is open Monday to Friday, from 9 AM to 5 PM."
+
+  utter_location:
+    - text: "We are located at 123 Health St., Springfield."
+
+  utter_contact_info:
+    - text: "You can call us at (555) 123-4567 or email us at contact@clinic.com."
+
+  utter_services:
+    - text: "We offer general medicine, pediatrics, dermatology, and diagnostic services."
+  
+  utter_working_days:
+    - text: "We are open Monday to Friday. The clinic is closed on weekends."
+  
+  utter_ask_full_name:
+    - text: "May I have your full name?"
+  
+  utter_ask_date_of_birth:
+    - text: "what is your date of birth?(Please use YYYY-MM-DD format)"
+
+  utter_ask_appointment_date:
+    - text: "What date would you like to book the appointment? (Please use YYYY-MM-DD format)"
+  
+  
+  utter_ask_appointment_time:
+    - text: "At what time would you like to book the appointment? Available slots are: 10:00, 11:00, 12:00, 13:00, 14:00, 15:00, and 16:00."
+
+  utter_ask_specific_doctor:
+    - text: "Do you have a preferred doctor? If yes, please enter their name. Otherwise type 'no'."
+
+  utter_submit:
+    - text: "Thanks {full_name}, your appointment is booked for {appointment_date}."
+
+  utter_no_problem:
+    - text: "No problem! Let me know if you change your mind."
+
+  utter_weekend_notice:
+    - text: "We're closed on weekends. Please choose a weekday (Monday-Friday)."
+
+  utter_request_audio:
+    - text: "Please upload your voice recording, and I’ll analyze it for Parkinson’s."
+
+  utter_ask_availability_doctor:
+    - text: "Which doctor would you like to check availability for? Please provide their name."
+
+  utter_ask_availability_date:
+    - text: "What date would you like to check availability for? (Please use YYYY-MM-DD format)"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

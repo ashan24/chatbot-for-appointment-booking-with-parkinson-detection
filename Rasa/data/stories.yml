@@ -1,0 +1,171 @@
+version: "3.1"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+
+- story: Provide working hours
+  steps:
+    - intent: working_hours
+    - action: utter_working_hours
+
+- story: Provide clinic location
+  steps:
+    - intent: location
+    - action: utter_location
+
+- story: Provide contact information
+  steps:
+    - intent: contact_info
+    - action: utter_contact_info
+
+- story: Provide list of services
+  steps:
+    - intent: services
+    - action: utter_services
+
+- story: provide working days
+  steps:
+    - intent: working_days
+    - action: utter_working_days
+
+- story: ask question working hours happy path
+  steps:
+    - intent: ask_opening_hours
+    - action: action_check_open_day
+    - intent: affirm 
+    - action: action_reset_appointment_slots
+    - action: appointment_form
+    - active_loop: appointment_form
+    - active_loop: null
+    - action: action_save_appointment
+    - intent: affirm
+    - action: action_confirm_suggested_appointment
+
+- story: working hours appointment suggestion rejected
+  steps:
+    - intent: ask_opening_hours
+    - action: action_check_open_day
+    - intent: affirm
+    - action: action_reset_appointment_slots
+    - action: appointment_form
+    - active_loop: appointment_form
+    - active_loop: null
+    - action: action_save_appointment
+    - intent: deny
+    - action: utter_no_problem
+
+- story: book appointment with all details suggestion accepted
+  steps:
+    - intent: book_appointment_with_details
+    - action: action_reset_appointment_slots
+    - action: appointment_form
+    - active_loop: appointment_form
+    - active_loop: null
+    - action: action_save_appointment
+    - intent: affirm
+    - action: action_confirm_suggested_appointment
+
+- story: book appointment with details suggestion rejected
+  steps:
+    - intent: book_appointment_with_details
+    - action: action_reset_appointment_slots
+    - action: appointment_form
+    - active_loop: appointment_form
+    - active_loop: null
+    - action: action_save_appointment
+    - intent: deny
+    - action: utter_no_problem
+
+- story: ask question working hours deny
+  steps:
+    - intent: ask_opening_hours
+    - action: action_check_open_day
+    - intent: deny
+    - action: utter_no_problem
+
+- story: book appointment suggestion accepted
+  steps:
+    - intent: book_appointment
+    - action: action_reset_appointment_slots
+    - action: appointment_form
+    - active_loop: appointment_form
+    - active_loop: null
+    - action: action_save_appointment
+    - intent: affirm
+    - action: action_confirm_suggested_appointment
+
+- story: book appointment suggestion rejected
+  steps:
+    - intent: book_appointment
+    - action: action_reset_appointment_slots
+    - action: appointment_form
+    - active_loop: appointment_form
+    - active_loop: null
+    - action: action_save_appointment
+    - intent: deny
+    - action: utter_no_problem
+
+- story: get appointment
+  steps:
+    - intent: view_appointment
+    - action: action_reset_appointment_slots
+    - action: getappointment_form
+    - active_loop: getappointment_form
+    - active_loop: null
+    - action: action_get_appointment
+
+- story: cancel appointment
+  steps:
+    - intent: cancel_appointment
+    - action: action_reset_appointment_slots
+    - action: getappointment_form
+    - active_loop: getappointment_form
+    - active_loop: null
+    - action: action_cancel_appointment
+
+- story: Upload audio and get Parkinson prediction
+  steps:
+    - intent: upload_audio
+    - action: utter_request_audio
+    - intent: send_audio
+    - action: action_predict_parkinson
+
+- story: list all doctors
+  steps:
+    - intent: ask_list_doctors
+    - action: action_get_doctor_list
+
+- story: ask for available times of doctor
+  steps:
+    - intent: ask_doctor_availability
+    - action: action_reset_appointment_slots
+    - action: doctoravailability_form
+    - active_loop: doctoravailability_form
+    - active_loop: null
+    - action: action_get_doctor_availability

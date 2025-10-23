@@ -1,0 +1,288 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
+
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+- intent: working_hours
+  examples: |
+    - What are your working hours?
+    - When does the clinic open and close?
+    - What time do you start seeing patients?
+    - Are you open on weekends?
+    - Can you tell me your opening hours?
+    - Until what time is the clinic open?
+    - Is the clinic open in the evening?
+    - What’s your schedule?
+    - When can I visit the doctor?
+    - Are you open today?
+
+- intent: location
+  examples: |
+    - Where is the clinic located?
+    - What is your address?
+    - Can you give me the location?
+    - How do I get to the clinic?
+    - Send me the address
+
+- intent: contact_info
+  examples: |
+    - How can I contact the clinic?
+    - What is your phone number?
+    - Do you have an email?
+    - I need the contact details
+    - Can I talk to someone?
+
+- intent: services
+  examples: |
+    - What services do you offer?
+    - Do you have pediatric services?
+    - Tell me about your specialties
+    - What kind of treatments do you provide?
+    - List of services available
+
+- intent: working_days
+  examples: |
+    - What days are you open?
+    - Are you open on weekdays?
+    - Do you work on Saturdays?
+    - Are you closed on weekends?
+    - Which days can I visit?
+    - What days do you accept patients?
+    - Is the clinic open on Sunday?
+    - Tell me your working days
+
+- intent: ask_opening_hours
+  examples: |
+    - Are you open on Sunday?
+    - Can I come on Sunday?
+    - Is your office open on Saturday?
+    - Are you working on Monday?
+    - Can I visit on Tuesday?
+
+- intent: book_appointment
+  examples: |
+    - I want to book an appointment
+    - Can I book a appointment?
+    - Schedule a meeting
+    - Book appointment for Friday
+
+- intent: view_appointment
+  examples: |
+    - I want to see my appointment
+    - Can I check my appointment?
+    - Do I have any appointment?
+    - What is my appointment date?
+    - When is my appointment?
+    - Check my appointment schedule
+    - I'd like to view my appointment
+    - Show my appointment details
+    - Tell me about my next appointment
+    - Any appointment booked for me?
+    - Can you check if I have an appointment?
+    - Look up my appointment
+    - What time is my appointment?
+    - Am I booked for any appointment?
+
+- intent: cancel_appointment
+  examples: |
+    - I want to cancel my appointment
+    - Cancel my booking
+    - I need to cancel the appointment I made
+    - Please cancel my scheduled appointment
+    - Can I cancel the appointment for tomorrow?
+    - Delete my doctor appointment
+    - I changed my mind, cancel the booking
+    - I don't want to go to the doctor anymore, cancel it
+    - Cancel it please
+    - I won't be able to make it, cancel my slot
+    - Is it possible to cancel my appointment?
+
+
+
+
+- intent: book_appointment_with_details
+  examples: |
+    # 🔹 Only date
+    - I want to book on [2025-07-08](date)
+    - Book appointment for [2025-07-09](date)
+    - Can I get a slot on [2025-07-10](date)?
+
+    # 🔹 Only time
+    - I want to book at [10:00](time)
+    - Can I get an appointment around [14:30](time)?
+    - Book me for [16:00](time)
+
+    # 🔹 Only doctor_name
+    - I want to book with Dr. [hiroki](doctor_name)
+    - Can you book me with Dr. [Lee](doctor_name)?
+    - Schedule me with Dr. [samuel](doctor_name)
+
+    # 🔹 Date + time
+    - Book an appointment on [2025-07-11](date) at [09:30](time)
+    - Can I get a slot at [13:00](time) on [2025-07-12](date)?
+    - Schedule me for [2025-07-13](date) at [11:00](time)
+
+    # 🔹 Date + doctor_name
+    - Book Dr. [Johnson](doctor_name) on [2025-07-14](date)
+    - I need an appointment with Dr. [Carter](doctor_name) on [2025-07-15](date)
+    - Please schedule with Dr. [Kumar](doctor_name) on [2025-07-16](date)
+
+    # 🔹 Time + doctor_name
+    - Book Dr. [James](doctor_name) at [10:45](time)
+    - I want Dr. [Emily](doctor_name) at [12:15](time)
+    - Can I schedule Dr. [Kevin](doctor_name) at [15:00](time)
+
+    # 🔹 Date + time + doctor_name
+    - I want an appointment on [2025-07-17](date) at [14:00](time) with Dr. [Wilson](doctor_name)
+    - Book me for [2025-07-18](date) [16:30](time) with Dr. [Adams](doctor_name)
+    - Book appointment at [08:45](time) on [2025-07-19](date) with Dr. [Brown](doctor_name)
+    - Schedule me with Dr. [Emily](doctor_name) at [11:15](time) on [2025-07-20](date)
+    - Please book an appointment with Dr. [Rachel Green](doctor_name) at [10:00](time) on [2025-07-21](date)
+
+
+- intent: upload_audio
+  examples: |
+    - I want to check if I have Parkinson's
+    - I want to test my voice
+    - Can I upload my voice file?
+    - Let me upload an audio file
+    - I have a recording to test
+    - I want to check Parkinson's
+
+- intent: send_audio
+  examples: |
+    - data:audio/wav;base64,[AUDIO]
+    - data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAE...
+    - data:audio/wav;base64,aGVsbG8gd29ybGQ=  # sample base64 (nonsensical)
+    - data:audio/wav;base64,SUQzBAAAAAAAI1RTU0...
+    - data:audio/wav;base64,V2VpcmQgYXVkaW8gY29udGVudA==  # fake base64
+    - data:audio/wav;base64,thisisjustfortrainingexample
+    - data:audio/wav;base64,fakebase64testmessagehere
+    - data:audio/wav;base64,somebase64audioencodedstringgoeshere
+    - data:audio/wav;base64,[voice-data]
+    - data:audio/wav;base64,soundinputencoded
+
+- intent: ask_list_doctors
+  examples: |
+    - Who are the doctors available?
+    - Show me all doctors
+    - List all doctors
+    - What doctors do you have?
+    - Tell me the doctors working in your hospital
+    - I want to see all available doctors
+
+- intent: ask_doctor_availability
+  examples: |
+    - check doctor availability
+    - I want to see which doctors are available
+    - show me available doctors
+    - When is Dr. [Smith](doctor_name) available on [2025-07-15](date)?
+    - Show me Dr. [John Doe](doctor_name)'s schedule for [2025-07-20](date)
+    - What is Dr. [Lisa Patel](doctor_name)'s availability on [2025-07-12](date)?
+    - Is Dr. [Rachel Green](doctor_name) working on [2025-07-18](date)?
+    - What are Dr. [Alex](doctor_name)'s available time slots on [2025-07-22](date)?
+    - When does Dr. [Taylor](doctor_name) usually work on [2025-07-10](date)?
+    - Tell me Dr. [John Lee](doctor_name)'s working hours on [2025-07-25](date)
+    - I want to check when Dr. [Lisa Patel](doctor_name) is free on [2025-07-28](date)
+    - Look up the availability of Dr. [Hiroki](doctor_name) on [2025-07-17](date)
+    - When can someone visit Dr. [Emily](doctor_name) on [2025-07-14](date)?
+    - Do you know when Dr. [Kevin](doctor_name) is on shift on [2025-07-16](date)?
+    - Find Dr. [Samuel](doctor_name)'s upcoming schedule for [2025-07-13](date)
+    - What days does Dr. [Carter](doctor_name) work, especially on [2025-07-19](date)?
+    - Is Dr. [Wilson](doctor_name) available next Monday ([2025-07-21](date))?
+    - Show me the next available day for Dr. [Adams](doctor_name), like [2025-07-23](date)
+    - Can you show me the calendar of Dr. [Brown](doctor_name) for [2025-07-24](date)?
+    - I want to know Dr. [Rachel Green](doctor_name)'s working hours on [2025-07-26](date)
+
+
+
+
+
+
