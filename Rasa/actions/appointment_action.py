@@ -8,7 +8,7 @@ import re
 DB_PARAMS = {
     'dbname': 'chatbot',
     'user': 'postgres',
-    'password': 'auckland',
+    'password': '*********',
     'host': 'localhost',
     'port': '5432'
 }
